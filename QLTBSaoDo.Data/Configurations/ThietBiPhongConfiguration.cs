@@ -15,6 +15,10 @@ namespace QLTBSaoDo.Data.Configurations
             builder.ToTable("ThietBiPhong");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.TenThietBi).IsRequired();
+            builder.Property(x => x.NgayLapDat)
+                .IsRequired(false)
+                .HasColumnType("Date")
+                .HasDefaultValueSql("GetDate()");
 
             builder.HasOne<ThietBi>(t => t.ThietBi)
                 .WithMany(x => x.ThietBiPhong)

@@ -15,6 +15,7 @@ namespace QLTBSaoDo.Data.Entities
         public int ThietBiId { get; set; }
         public int PhongId { get; set; }
         public string TenThietBi { get; set; }
+        public DateTime? NgayLapDat { get; set; }
 
         public virtual Phong Phong { get; set; }
         public virtual ThietBi ThietBi { get; set; }
