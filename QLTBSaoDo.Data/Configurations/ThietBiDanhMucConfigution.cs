@@ -17,11 +17,11 @@ namespace QLTBSaoDo.Data.Configurations
             builder.HasKey(x => new { x.ThietBiId, x.DanhMucId });
 
             builder.HasOne<ThietBi>(t => t.ThietBi)
-                .WithMany(x => x.ThietBiDanhMucs)
+                .WithMany(x => x.ThietBiDanhMuc)
                 .HasForeignKey(t => t.ThietBiId);
 
             builder.HasOne<DanhMuc>(d => d.DanhMuc)
-                .WithMany(x => x.ThietBiDanhMucs)
+                .WithMany(x => x.ThietBiDanhMuc)
                 .HasForeignKey(d => d.DanhMucId);
 
         }

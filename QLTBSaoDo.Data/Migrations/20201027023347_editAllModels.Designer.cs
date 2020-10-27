@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QLTBSaoDo.Data.EF;
 
 namespace QLTBSaoDo.Data.Migrations
 {
     [DbContext(typeof(QLTBDbContext))]
-    partial class QLTBDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201027023347_editAllModels")]
+    partial class editAllModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -4,12 +4,12 @@ using System.Text;
 
 namespace QLTBSaoDo.Data.Entities
 {
-    public class TSThanhLy
+    public partial class TSThanhLy
     {
         public int Id { get; set; }
         public int ThietBiPhongId { get; set; }
         public decimal Gia { get; set; }
 
-        public ThietBiPhong ThietBiPhong { get; set; }
+        public virtual ThietBiPhong ThietBiPhong { get; set; }
     }
 }

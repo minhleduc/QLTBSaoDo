@@ -14,15 +14,18 @@ namespace QLTBSaoDo.Data.Configurations
         {
             builder.ToTable("Permission");
             builder.HasKey(x => x.RoleId);
-            builder.HasOne<Role>(r => r.Role)
-                .WithMany(x => x.Permissions)
-                .HasForeignKey(x => x.RoleId);
-            builder.HasOne<Function>(f => f.Function)
-                .WithMany(x => x.Permissions)
+
+            builder.HasOne(d => d.Role)
+                .WithMany(p => p.Permission)
+                .HasForeignKey(d => d.RoleId);
+
+            builder.HasOne(f => f.Function)
+                .WithMany(x => x.Permission)
                 .HasForeignKey(x => x.FunctionId);
-            builder.HasOne<Actions>(f => f.Action)
-                .WithMany(x => x.Permissions)
-                .HasForeignKey(x => x.ActionId);
+
+            builder.HasOne(f => f.Actions)
+                .WithMany(x => x.Permission)
+                .HasForeignKey(f => f.ActionId);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace QLTBSaoDo.Data.Configurations
                 .HasForeignKey<GVQuanLy>(x => x.UserId);
 
             builder.HasOne<Khoa>(k => k.Khoa)
-                .WithMany(x => x.GVQuanLys)
+                .WithMany(x => x.GVQuanLy)
                 .HasForeignKey(x => x.KhoaId);
 
             builder.HasOne<Phong>(k => k.Phong)

@@ -4,8 +4,13 @@ using System.Text;
 
 namespace QLTBSaoDo.Data.Entities
 {
-    public class NhaCungCap
+    public partial class NhaCungCap
     {
+        public NhaCungCap()
+        {
+            ChiTietDonNhap = new HashSet<ChiTietDonNhap>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
@@ -13,6 +18,6 @@ namespace QLTBSaoDo.Data.Entities
         public string Email { get; set; }
         public string NguoiDaiDien { get; set; }
 
-        public IList<ChiTietDonNhap> ChiTietDonNhaps { get; set; }
+        public virtual ICollection<ChiTietDonNhap> ChiTietDonNhap { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QLTBSaoDo.Data.Entities
 {
-    public class ChiTietDonNhap
+    public partial class ChiTietDonNhap
     {
         public int Id { get; set; }
         public int DonNhapId { get; set; }
@@ -13,8 +13,8 @@ namespace QLTBSaoDo.Data.Entities
         public decimal Gia { get; set; }
         public int NhaCungCapId { get; set; }
 
-        public DonNhap DonNhap { get; set; }
-        public ThietBi ThietBi { get; set; }
-        public NhaCungCap NhaCungCap { get; set; }
+        public virtual DonNhap DonNhap { get; set; }
+        public virtual NhaCungCap NhaCungCap { get; set; }
+        public virtual ThietBi ThietBi { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace QLTBSaoDo.Data.Entities
 {
-    public class TinhTrang
+    public partial class TinhTrang
     {
         public int Id { get; set; }
         public int ThietBiPhongId { get; set; }
@@ -13,6 +13,6 @@ namespace QLTBSaoDo.Data.Entities
         public string ChiTiet { get; set; }
         public DateTime? NgayCapNhat { get; set; }
 
-        public ThietBiPhong ThietBiPhong { get; set; }
+        public virtual ThietBiPhong ThietBiPhong { get; set; }
     }
 }

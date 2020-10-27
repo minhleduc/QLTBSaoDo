@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QLTBSaoDo.Data.Entities
 {
-    public class User
+    public partial class User
     {
         public int Id { get; set; }
         public string UserName { get; set; }
@@ -14,7 +14,7 @@ namespace QLTBSaoDo.Data.Entities
         public string Email { get; set; }
         public DateTime? DOB { get; set; }
 
-        public GVQuanLy GVQuanLy { get; set; }
-        public UserRoles UserRoles { get; set; }
+        public virtual GVQuanLy GVQuanLy { get; set; }
+        public virtual UserRoles UserRoles { get; set; }
     }
 }

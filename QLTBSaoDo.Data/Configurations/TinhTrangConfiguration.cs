@@ -15,15 +15,18 @@ namespace QLTBSaoDo.Data.Configurations
         {
             builder.ToTable("TinhTrang");
             builder.HasKey(x => x.Id);
+
             builder.Property(x => x.HienTrang)
                 .HasColumnName("HienTrang")
                 .HasColumnType("nvarchar(max)")
                 .HasDefaultValue<HienTrang>(HienTrang.Tốt);
+
             builder.Property(x => x.NgayCapNhat)
                 .HasColumnType("Date")
                 .HasDefaultValueSql("GetDate()");
+
             builder.HasOne<ThietBiPhong>(t => t.ThietBiPhong)
-                .WithMany(x => x.TinhTrangs)
+                .WithMany(x => x.TinhTrang)
                 .HasForeignKey(x => x.ThietBiPhongId);
         }
     }
