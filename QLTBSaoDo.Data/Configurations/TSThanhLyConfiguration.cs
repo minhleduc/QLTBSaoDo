@@ -13,12 +13,15 @@ namespace QLTBSaoDo.Data.Configurations
         {
             builder.ToTable("TSThanhLy");
             builder.HasKey(x => x.Id);
+
             builder.Property(x => x.Gia)
-                .HasColumnType("decimal(15,2")
+                .HasColumnType("decimal(15, 2)")
                 .HasDefaultValueSql("0");
+
             builder.HasOne<ThietBiPhong>(t => t.ThietBiPhong)
                 .WithOne(x => x.TSThanhLy)
-                .HasForeignKey<TSThanhLy>(x => x.ThietBiPhongId);
+                .HasForeignKey<TSThanhLy>(x => x.ThietBiPhongId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

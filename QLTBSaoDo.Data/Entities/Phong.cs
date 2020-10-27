@@ -13,7 +13,7 @@ namespace QLTBSaoDo.Data.Entities
 
         public int KhoaId { get; set; }
         public Khoa Khoa { get; set; }
-        public IList<GVQuanLy> GVQuanLys { get; set; }
+        public GVQuanLy GVQuanLy { get; set; }
         public IList<ThietBiPhong> ThietBiPhongs { get; set; }
     }
 }
