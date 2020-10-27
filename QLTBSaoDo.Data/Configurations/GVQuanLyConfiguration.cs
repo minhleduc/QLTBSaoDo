@@ -21,12 +21,13 @@ namespace QLTBSaoDo.Data.Configurations
                 .HasForeignKey<GVQuanLy>(x => x.UserId);
 
             builder.HasOne<Khoa>(k => k.Khoa)
-                .WithMany(x => x.GVQuanLys)
+                .WithMany(x => x.GVQuanLy)
                 .HasForeignKey(x => x.KhoaId);
 
             builder.HasOne<Phong>(k => k.Phong)
-                .WithMany(x => x.GVQuanLys)
-                .HasForeignKey(x => x.PhongId);
+                .WithOne(x => x.GVQuanLy)
+                .HasForeignKey<GVQuanLy>(x => x.PhongId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

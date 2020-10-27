@@ -17,7 +17,7 @@ namespace QLTBSaoDo.Data.Configurations
             builder.Property(x => x.Name).IsRequired();
 
             builder.HasOne<Khoa>(k => k.Khoa)
-                .WithMany(x => x.Phongs)
+                .WithMany(x => x.Phong)
                 .HasForeignKey(x => x.KhoaId);
         }
     }

@@ -22,15 +22,15 @@ namespace QLTBSaoDo.Data.Configurations
                 .HasColumnType("decimal(15,2)");
 
             builder.HasOne<DonNhap>(d => d.DonNhap)
-                .WithMany(x => x.ChiTietDonNhaps)
+                .WithMany(x => x.ChiTietDonNhap)
                 .HasForeignKey(t => t.DonNhapId);
 
             builder.HasOne<ThietBi>(t => t.ThietBi)
-                .WithMany(x => x.ChiTietDonNhaps)
+                .WithMany(x => x.ChiTietDonNhap)
                 .HasForeignKey(t => t.ThietBiId);
 
             builder.HasOne<NhaCungCap>(ncc => ncc.NhaCungCap)
-                .WithMany(x => x.ChiTietDonNhaps)
+                .WithMany(x => x.ChiTietDonNhap)
                 .HasForeignKey(ncc => ncc.NhaCungCapId);
 
         }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QLTBSaoDo.Data.Entities
 {
-    public class AppConfig
+    public partial class AppConfig
     {
         public string Key { get; set; }
         public string Value { get; set; }
