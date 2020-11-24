@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QLTBSaoDo.Data\QLTBSaoDo.Data.csproj" />
-    <ProjectReference Include="..\QLTBSaoDo.ViewModels\QLTBSaoDo.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
