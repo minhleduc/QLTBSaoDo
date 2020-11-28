@@ -14,8 +14,8 @@ namespace QLTBSaoDo.ViewModels.Catalog.ThietBis
         public string Details { get; set; }
         public DateTime? DateCreated { get; set; }
 
-        public string Loai { get; set; }
-        public string DanhMuc { get; set; }
+        //public string Loai { get; set; }
+        //public string DanhMuc { get; set; }
 
         public virtual ICollection<ChiTietDonNhap> ChiTietDonNhap { get; set; }
         public virtual ICollection<ThietBiDanhMuc> ThietBiDanhMuc { get; set; }

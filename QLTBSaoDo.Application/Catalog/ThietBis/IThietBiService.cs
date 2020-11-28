@@ -12,6 +12,7 @@ namespace QLTBSaoDo.Application.Catalog.ThietBis
         Task<int> Create(ThietBiCreateRequest request);
         Task<int> Update(ThietBiUpdateRequest request);
         Task<int> Delete(int thietbiId);
+        Task<List<ThietBiViewModel>> GetAll();
         Task<PageResult<ThietBiViewModel>> GetAllPaging(GetThietBiPagingRequest request);
         Task<PageResult<ThietBiViewModel>> GetAllByLoaiId(GetThietBiPagingRequest request);
         Task<PageResult<ThietBiViewModel>> GetAllByDanhMucId(GetThietBiPagingRequest request);

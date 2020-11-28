@@ -44,6 +44,23 @@ namespace QLTBSaoDo.Application.Catalog.ThietBis
             return await _context.SaveChangesAsync();
         }
 
+        public async Task<List<ThietBiViewModel>> GetAll()
+        {
+            //1. select join
+            var query = from tb in _context.ThietBi
+                        select new { tb };
+
+            var data = await query.Select(x => new ThietBiViewModel()
+            {
+                Id = x.tb.Id,
+                Name = x.tb.Name,
+                DateCreated = x.tb.DateCreated,
+                Price = x.tb.Price,
+                Stock = x.tb.Stock,
+                Details = x.tb.Details
+            }).ToListAsync();
+            return data;
+        }
 
         public async Task<PageResult<ThietBiViewModel>> GetAllByDanhMucId(GetThietBiPagingRequest request)
         {
@@ -78,8 +95,8 @@ namespace QLTBSaoDo.Application.Catalog.ThietBis
                     Price = x.tb.Price,
                     Stock = x.tb.Stock,
                     Details = x.tb.Details,
-                    Loai = x.loai.Name,
-                    DanhMuc = x.dm.Name
+                    //Loai = x.loai.Name,
+                    //DanhMuc = x.dm.Name
                 }).ToListAsync();
 
             //4. Select and projection
@@ -126,8 +143,8 @@ namespace QLTBSaoDo.Application.Catalog.ThietBis
                     Price = x.tb.Price,
                     Stock = x.tb.Stock,
                     Details = x.tb.Details,
-                    Loai = x.loai.Name,
-                    DanhMuc = x.dm.Name
+                    //Loai = x.loai.Name,
+                    //DanhMuc = x.dm.Name
                 }).ToListAsync();
 
             //4. Select and projection
@@ -178,8 +195,8 @@ namespace QLTBSaoDo.Application.Catalog.ThietBis
                     Price = x.tb.Price,
                     Stock = x.tb.Stock,
                     Details = x.tb.Details,
-                    Loai = x.loai.Name,
-                    DanhMuc = x.dm.Name
+                    //Loai = x.loai.Name,
+                    //DanhMuc = x.dm.Name
                 }).ToListAsync();
 
             //4. Select and projection

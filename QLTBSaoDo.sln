@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QLTBSaoDo.Data", "QLTBSaoDo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QLTBSaoDo.Application", "QLTBSaoDo.Application\QLTBSaoDo.Application.csproj", "{CABD2951-AE42-4D29-A115-97AFDB14A44A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLTBSaoDo.ViewModels", "QLTBSaoDo.ViewModels\QLTBSaoDo.ViewModels.csproj", "{CF4E6E93-B2DB-4FC2-809A-7014BCA3DFD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QLTBSaoDo.ViewModels", "QLTBSaoDo.ViewModels\QLTBSaoDo.ViewModels.csproj", "{CF4E6E93-B2DB-4FC2-809A-7014BCA3DFD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLTBSaoDo.BackendApi", "QLTBSaoDo.BackendApi\QLTBSaoDo.BackendApi.csproj", "{841BF147-517D-4D7D-BEE2-974DCD314301}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{CF4E6E93-B2DB-4FC2-809A-7014BCA3DFD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF4E6E93-B2DB-4FC2-809A-7014BCA3DFD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF4E6E93-B2DB-4FC2-809A-7014BCA3DFD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{841BF147-517D-4D7D-BEE2-974DCD314301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{841BF147-517D-4D7D-BEE2-974DCD314301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{841BF147-517D-4D7D-BEE2-974DCD314301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{841BF147-517D-4D7D-BEE2-974DCD314301}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
