@@ -13,13 +13,8 @@ namespace QLTBSaoDo.ViewModels.Catalog.ThietBis
         public int Stock { get; set; }
         public string Details { get; set; }
         public DateTime? DateCreated { get; set; }
+        public string Loai { get; set; }
+        public ICollection<DanhMuc> DanhMucs { get; set; }
 
-        //public string Loai { get; set; }
-        //public string DanhMuc { get; set; }
-
-        public virtual ICollection<ChiTietDonNhap> ChiTietDonNhap { get; set; }
-        public virtual ICollection<ThietBiDanhMuc> ThietBiDanhMuc { get; set; }
-        public virtual ICollection<ThietBiLoai> ThietBiLoai { get; set; }
-        public virtual ICollection<ThietBiPhong> ThietBiPhong { get; set; }
     }
 }

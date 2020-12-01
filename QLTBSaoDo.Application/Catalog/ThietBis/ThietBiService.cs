@@ -30,7 +30,8 @@ namespace QLTBSaoDo.Application.Catalog.ThietBis
 
             };
             _context.ThietBi.Add(thietbi);
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return thietbi.Id;
         }
 
         public async Task<int> Delete(int thietbiId)
@@ -208,6 +209,22 @@ namespace QLTBSaoDo.Application.Catalog.ThietBis
                 Items = data
             };
             return pagedResult;
+        }
+
+        public async Task<ThietBiViewModel> GetById(int thietBiId)
+        {
+            var thietbi = await _context.ThietBi.FindAsync(thietBiId);
+            //1. select join
+            var data = new ThietBiViewModel()
+            {
+                Id = thietbi.Id,
+                Name = thietbi.Name,
+                DateCreated = thietbi.DateCreated,
+                Price = thietbi.Price,
+                Stock = thietbi.Stock,
+                Details = thietbi.Details
+            };
+            return data;
         }
 
         public async Task<int> Update(ThietBiUpdateRequest request)
