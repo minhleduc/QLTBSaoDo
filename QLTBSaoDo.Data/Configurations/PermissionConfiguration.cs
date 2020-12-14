@@ -15,9 +15,9 @@ namespace QLTBSaoDo.Data.Configurations
             builder.ToTable("Permission");
             builder.HasKey(x => x.RoleId);
 
-            builder.HasOne(d => d.Role)
-                .WithMany(p => p.Permission)
-                .HasForeignKey(d => d.RoleId);
+            //builder.HasOne(d => d.AppRole)
+            //    .WithMany(p => p.Permission)
+            //    .HasForeignKey(d => d.RoleId);
 
             builder.HasOne(f => f.Function)
                 .WithMany(x => x.Permission)
