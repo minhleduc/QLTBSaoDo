@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using QLTBSaoDo.Data.Configurations;
 using QLTBSaoDo.Data.Entities;
 using System;
@@ -7,7 +10,7 @@ using System.Text;
 
 namespace QLTBSaoDo.Data.EF
 {
-    public class QLTBDbContext : DbContext
+    public class QLTBDbContext : IdentityDbContext<AppUser, AppRole, Guid>
     {
         public QLTBDbContext(DbContextOptions options) : base(options)
         {
@@ -25,7 +28,7 @@ namespace QLTBSaoDo.Data.EF
             modelBuilder.ApplyConfiguration(new KhoaConfiguration());
             modelBuilder.ApplyConfiguration(new LoaiConfiguration());
             modelBuilder.ApplyConfiguration(new NhaCungCapConfiguration());
-            modelBuilder.ApplyConfiguration(new PermissionConfiguration());
+            //modelBuilder.ApplyConfiguration(new PermissionConfiguration());
             modelBuilder.ApplyConfiguration(new PhongConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new ThietBiConfiguration());
@@ -35,8 +38,16 @@ namespace QLTBSaoDo.Data.EF
             modelBuilder.ApplyConfiguration(new TinhTrangConfiguration());
             modelBuilder.ApplyConfiguration(new TSThanhLyConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.ApplyConfiguration(new UserRolesConfiguration());
+            //modelBuilder.ApplyConfiguration(new UserRolesConfiguration());
             //base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.UserId, x.RoleId });
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
+
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
+
         }
 
         public DbSet<AppConfig> AppConfig { get; set; }
@@ -49,16 +60,16 @@ namespace QLTBSaoDo.Data.EF
         public DbSet<Khoa> Khoa { get; set; }
         public DbSet<Loai> Loai { get; set; }
         public DbSet<NhaCungCap> NhaCungCap { get; set; }
-        public DbSet<Permission> Permission { get; set; }
+        //public DbSet<Permission> Permission { get; set; }
         public DbSet<Phong> Phong { get; set; }
-        public DbSet<Role> Role { get; set; }
+        public DbSet<AppRole> Role { get; set; }
         public DbSet<ThietBi> ThietBi { get; set; }
         public DbSet<ThietBiDanhMuc> ThietBiDanhMuc { get; set; }
         public DbSet<ThietBiLoai> ThietBiLoai { get; set; }
         public DbSet<ThietBiPhong> ThietBiPhong { get; set; }
         public DbSet<TinhTrang> TinhTrang { get; set; }
         public DbSet<TSThanhLy> TSThanhLy { get; set; }
-        public DbSet<User> User { get; set; }
-        public DbSet<UserRoles> UserRoles { get; set; }
+        //public DbSet<User> User { get; set; }
+        //public DbSet<UserRoles> UserRoles { get; set; }
     }
 }

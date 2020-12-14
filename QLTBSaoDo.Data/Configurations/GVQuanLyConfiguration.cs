@@ -16,9 +16,9 @@ namespace QLTBSaoDo.Data.Configurations
 
             builder.HasKey(x => new { x.UserId, x.KhoaId, x.PhongId });
 
-            builder.HasOne<User>(u => u.User)
-                .WithOne(x => x.GVQuanLy)
-                .HasForeignKey<GVQuanLy>(x => x.UserId);
+            builder.HasOne<AppUser>(u => u.AppUser)
+                .WithMany(x => x.GVQuanLy)
+                .HasForeignKey(x => x.UserId);
 
             builder.HasOne<Khoa>(k => k.Khoa)
                 .WithMany(x => x.GVQuanLy)
