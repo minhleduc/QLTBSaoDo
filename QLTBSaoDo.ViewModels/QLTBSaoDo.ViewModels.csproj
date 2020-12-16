@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="9.3.0" />
+    <PackageReference Include="Microsoft.Data.OData" Version="5.8.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\QLTBSaoDo.Data\QLTBSaoDo.Data.csproj" />
   </ItemGroup>
 

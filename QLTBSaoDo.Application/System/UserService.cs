@@ -74,9 +74,10 @@ namespace QLTBSaoDo.Application.System
 
             user = new AppUser()
             {
-                Dob = request.DOB,
+                Dob = request.Dob,
                 Email = request.Email,
-                FirstName = request.FullName,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
                 UserName = request.UserName,
                 PhoneNumber = request.PhoneNumber
             };
