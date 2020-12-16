@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace QLTBSaoDo.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,119 @@ namespace QLTBSaoDo.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppConfig", x => x.Key);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<Guid>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppRoleClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppRoles",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    NormalizedName = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    ChiTiet = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUser",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    NormalizedUserName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    NormalizedEmail = table.Column<string>(nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Dob = table.Column<DateTime>(type: "Date", nullable: true, defaultValueSql: "GetDate()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUser", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<Guid>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUserLogins",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(nullable: false),
+                    LoginProvider = table.Column<string>(nullable: true),
+                    ProviderKey = table.Column<string>(nullable: true),
+                    ProviderDisplayName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserLogins", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(nullable: false),
+                    RoleId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserRoles", x => new { x.UserId, x.RoleId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(nullable: false),
+                    LoginProvider = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserTokens", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -121,20 +234,6 @@ namespace QLTBSaoDo.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Role",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: false),
-                    Detail = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Role", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ThietBi",
                 columns: table => new
                 {
@@ -152,21 +251,37 @@ namespace QLTBSaoDo.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Permission",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    RoleId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    FullName = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    DOB = table.Column<DateTime>(type: "Date", nullable: true, defaultValueSql: "GetDate()")
+                    FunctionId = table.Column<int>(nullable: false),
+                    ActionId = table.Column<int>(nullable: false),
+                    ActionsId = table.Column<int>(nullable: true),
+                    AppRoleId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Permission", x => x.RoleId);
+                    table.ForeignKey(
+                        name: "FK_Permission_Action_ActionsId",
+                        column: x => x.ActionsId,
+                        principalTable: "Action",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Permission_AppRoles_AppRoleId",
+                        column: x => x.AppRoleId,
+                        principalTable: "AppRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Permission_Function_FunctionId",
+                        column: x => x.FunctionId,
+                        principalTable: "Function",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -186,37 +301,6 @@ namespace QLTBSaoDo.Data.Migrations
                         name: "FK_Phong_Khoa_KhoaId",
                         column: x => x.KhoaId,
                         principalTable: "Khoa",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Permission",
-                columns: table => new
-                {
-                    RoleId = table.Column<int>(nullable: false),
-                    FunctionId = table.Column<int>(nullable: false),
-                    ActionId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permission", x => x.RoleId);
-                    table.ForeignKey(
-                        name: "FK_Permission_Action_ActionId",
-                        column: x => x.ActionId,
-                        principalTable: "Action",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Permission_Function_FunctionId",
-                        column: x => x.FunctionId,
-                        principalTable: "Function",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Permission_Role_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -305,34 +389,10 @@ namespace QLTBSaoDo.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserRoles",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_UserRoles_Role_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Role",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserRoles_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "GVQuanLy",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
                     KhoaId = table.Column<int>(nullable: false),
                     PhongId = table.Column<int>(nullable: false)
                 },
@@ -351,9 +411,9 @@ namespace QLTBSaoDo.Data.Migrations
                         principalTable: "Phong",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_GVQuanLy_User_UserId",
+                        name: "FK_GVQuanLy_AppUser_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "AppUser",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -366,7 +426,8 @@ namespace QLTBSaoDo.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ThietBiId = table.Column<int>(nullable: false),
                     PhongId = table.Column<int>(nullable: false),
-                    TenThietBi = table.Column<string>(nullable: false)
+                    TenThietBi = table.Column<string>(nullable: false),
+                    NgayLapDat = table.Column<DateTime>(type: "Date", nullable: true, defaultValueSql: "GetDate()")
                 },
                 constraints: table =>
                 {
@@ -414,7 +475,8 @@ namespace QLTBSaoDo.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ThietBiPhongId = table.Column<int>(nullable: false),
-                    Gia = table.Column<decimal>(type: "decimal(15, 2)", nullable: false, defaultValueSql: "0")
+                    Gia = table.Column<decimal>(type: "decimal(15, 2)", nullable: false, defaultValueSql: "0"),
+                    NgayThanhLy = table.Column<DateTime>(type: "Date", nullable: true, defaultValueSql: "GetDate()")
                 },
                 constraints: table =>
                 {
@@ -425,6 +487,13 @@ namespace QLTBSaoDo.Data.Migrations
                         principalTable: "ThietBiPhong",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppUser_UserName",
+                table: "AppUser",
+                column: "UserName",
+                unique: true,
+                filter: "[UserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChiTietDonNhap_DonNhapId",
@@ -453,15 +522,14 @@ namespace QLTBSaoDo.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_GVQuanLy_UserId",
-                table: "GVQuanLy",
-                column: "UserId",
-                unique: true);
+                name: "IX_Permission_ActionsId",
+                table: "Permission",
+                column: "ActionsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permission_ActionId",
+                name: "IX_Permission_AppRoleId",
                 table: "Permission",
-                column: "ActionId");
+                column: "AppRoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Permission_FunctionId",
@@ -503,30 +571,27 @@ namespace QLTBSaoDo.Data.Migrations
                 table: "TSThanhLy",
                 column: "ThietBiPhongId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_UserName",
-                table: "User",
-                column: "UserName",
-                unique: true,
-                filter: "[UserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserRoles_RoleId",
-                table: "UserRoles",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserRoles_UserId",
-                table: "UserRoles",
-                column: "UserId",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "AppConfig");
+
+            migrationBuilder.DropTable(
+                name: "AppRoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "AppUserClaims");
+
+            migrationBuilder.DropTable(
+                name: "AppUserLogins");
+
+            migrationBuilder.DropTable(
+                name: "AppUserRoles");
+
+            migrationBuilder.DropTable(
+                name: "AppUserTokens");
 
             migrationBuilder.DropTable(
                 name: "ChiTietDonNhap");
@@ -550,16 +615,19 @@ namespace QLTBSaoDo.Data.Migrations
                 name: "TSThanhLy");
 
             migrationBuilder.DropTable(
-                name: "UserRoles");
-
-            migrationBuilder.DropTable(
                 name: "DonNhap");
 
             migrationBuilder.DropTable(
                 name: "NhaCungCap");
 
             migrationBuilder.DropTable(
+                name: "AppUser");
+
+            migrationBuilder.DropTable(
                 name: "Action");
+
+            migrationBuilder.DropTable(
+                name: "AppRoles");
 
             migrationBuilder.DropTable(
                 name: "Function");
@@ -572,12 +640,6 @@ namespace QLTBSaoDo.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ThietBiPhong");
-
-            migrationBuilder.DropTable(
-                name: "Role");
-
-            migrationBuilder.DropTable(
-                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Phong");

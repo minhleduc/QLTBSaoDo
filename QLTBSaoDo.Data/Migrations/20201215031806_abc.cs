@@ -2,7 +2,7 @@
 
 namespace QLTBSaoDo.Data.Migrations
 {
-    public partial class editAllModels : Migration
+    public partial class abc : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

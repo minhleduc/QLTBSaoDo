@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using QLTBSaoDo.Data.EF;
 using QLTBSaoDo.Application.Catalog.ThietBis;
 using Microsoft.OpenApi.Models;
+using QLTBSaoDo.Application.System;
+using Microsoft.AspNetCore.Identity;
+using QLTBSaoDo.Data.Entities;
 
 namespace QLTBSaoDo.BackendApi
 {
@@ -29,8 +32,20 @@ namespace QLTBSaoDo.BackendApi
             services.AddDbContext<QLTBDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("QLTBDatabase")));
 
+            services.AddIdentity<AppUser, AppRole>()
+                .AddEntityFrameworkStores<QLTBDbContext>()
+                .AddDefaultTokenProviders();
+
+
+
+
             //Declare DI
             services.AddTransient<IThietBiService, ThietBiService>();
+            services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+            services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddControllersWithViews();
 

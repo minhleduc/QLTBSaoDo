@@ -10,8 +10,8 @@ using QLTBSaoDo.Data.EF;
 namespace QLTBSaoDo.Data.Migrations
 {
     [DbContext(typeof(QLTBDbContext))]
-    [Migration("20201026042440_Initial")]
-    partial class Initial
+    [Migration("20201207152713_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,101 @@ namespace QLTBSaoDo.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("AppUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.ToTable("AppUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("AppUserTokens");
+                });
 
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.Actions", b =>
                 {
@@ -48,6 +143,98 @@ namespace QLTBSaoDo.Data.Migrations
                     b.HasKey("Key");
 
                     b.ToTable("AppConfig");
+                });
+
+            modelBuilder.Entity("QLTBSaoDo.Data.Entities.AppRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ChiTiet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRoles");
+                });
+
+            modelBuilder.Entity("QLTBSaoDo.Data.Entities.AppUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Dob")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("Date")
+                        .HasDefaultValueSql("GetDate()");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserName")
+                        .IsUnique()
+                        .HasFilter("[UserName] IS NOT NULL");
+
+                    b.ToTable("AppUser");
                 });
 
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.ChiTietDonNhap", b =>
@@ -148,8 +335,8 @@ namespace QLTBSaoDo.Data.Migrations
 
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.GVQuanLy", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("KhoaId")
                         .HasColumnType("int");
@@ -162,9 +349,6 @@ namespace QLTBSaoDo.Data.Migrations
                     b.HasIndex("KhoaId");
 
                     b.HasIndex("PhongId")
-                        .IsUnique();
-
-                    b.HasIndex("UserId")
                         .IsUnique();
 
                     b.ToTable("GVQuanLy");
@@ -243,17 +427,27 @@ namespace QLTBSaoDo.Data.Migrations
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.Permission", b =>
                 {
                     b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ActionId")
                         .HasColumnType("int");
+
+                    b.Property<int?>("ActionsId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("AppRoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("FunctionId")
                         .HasColumnType("int");
 
                     b.HasKey("RoleId");
 
-                    b.HasIndex("ActionId");
+                    b.HasIndex("ActionsId");
+
+                    b.HasIndex("AppRoleId");
 
                     b.HasIndex("FunctionId");
 
@@ -284,25 +478,6 @@ namespace QLTBSaoDo.Data.Migrations
                     b.ToTable("Phong");
                 });
 
-            modelBuilder.Entity("QLTBSaoDo.Data.Entities.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Detail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Role");
-                });
-
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.TSThanhLy", b =>
                 {
                     b.Property<int>("Id")
@@ -314,6 +489,11 @@ namespace QLTBSaoDo.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("decimal(15, 2)")
                         .HasDefaultValueSql("0");
+
+                    b.Property<DateTime?>("NgayThanhLy")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("Date")
+                        .HasDefaultValueSql("GetDate()");
 
                     b.Property<int>("ThietBiPhongId")
                         .HasColumnType("int");
@@ -398,6 +578,11 @@ namespace QLTBSaoDo.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("NgayLapDat")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("Date")
+                        .HasDefaultValueSql("GetDate()");
+
                     b.Property<int>("PhongId")
                         .HasColumnType("int");
 
@@ -449,76 +634,22 @@ namespace QLTBSaoDo.Data.Migrations
                     b.ToTable("TinhTrang");
                 });
 
-            modelBuilder.Entity("QLTBSaoDo.Data.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("DOB")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("Date")
-                        .HasDefaultValueSql("GetDate()");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserName")
-                        .IsUnique()
-                        .HasFilter("[UserName] IS NOT NULL");
-
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("QLTBSaoDo.Data.Entities.UserRoles", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("UserRoles");
-                });
-
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.ChiTietDonNhap", b =>
                 {
                     b.HasOne("QLTBSaoDo.Data.Entities.DonNhap", "DonNhap")
-                        .WithMany("ChiTietDonNhaps")
+                        .WithMany("ChiTietDonNhap")
                         .HasForeignKey("DonNhapId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("QLTBSaoDo.Data.Entities.NhaCungCap", "NhaCungCap")
-                        .WithMany("ChiTietDonNhaps")
+                        .WithMany("ChiTietDonNhap")
                         .HasForeignKey("NhaCungCapId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("QLTBSaoDo.Data.Entities.ThietBi", "ThietBi")
-                        .WithMany("ChiTietDonNhaps")
+                        .WithMany("ChiTietDonNhap")
                         .HasForeignKey("ThietBiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -527,7 +658,7 @@ namespace QLTBSaoDo.Data.Migrations
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.GVQuanLy", b =>
                 {
                     b.HasOne("QLTBSaoDo.Data.Entities.Khoa", "Khoa")
-                        .WithMany("GVQuanLys")
+                        .WithMany("GVQuanLy")
                         .HasForeignKey("KhoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -538,30 +669,26 @@ namespace QLTBSaoDo.Data.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("QLTBSaoDo.Data.Entities.User", "User")
-                        .WithOne("GVQuanLy")
-                        .HasForeignKey("QLTBSaoDo.Data.Entities.GVQuanLy", "UserId")
+                    b.HasOne("QLTBSaoDo.Data.Entities.AppUser", "AppUser")
+                        .WithMany("GVQuanLy")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.Permission", b =>
                 {
-                    b.HasOne("QLTBSaoDo.Data.Entities.Actions", "Action")
-                        .WithMany("Permissions")
-                        .HasForeignKey("ActionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("QLTBSaoDo.Data.Entities.Actions", "Actions")
+                        .WithMany("Permission")
+                        .HasForeignKey("ActionsId");
+
+                    b.HasOne("QLTBSaoDo.Data.Entities.AppRole", "AppRole")
+                        .WithMany()
+                        .HasForeignKey("AppRoleId");
 
                     b.HasOne("QLTBSaoDo.Data.Entities.Function", "Function")
-                        .WithMany("Permissions")
+                        .WithMany("Permission")
                         .HasForeignKey("FunctionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QLTBSaoDo.Data.Entities.Role", "Role")
-                        .WithMany("Permissions")
-                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -569,7 +696,7 @@ namespace QLTBSaoDo.Data.Migrations
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.Phong", b =>
                 {
                     b.HasOne("QLTBSaoDo.Data.Entities.Khoa", "Khoa")
-                        .WithMany("Phongs")
+                        .WithMany("Phong")
                         .HasForeignKey("KhoaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -587,13 +714,13 @@ namespace QLTBSaoDo.Data.Migrations
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.ThietBiDanhMuc", b =>
                 {
                     b.HasOne("QLTBSaoDo.Data.Entities.DanhMuc", "DanhMuc")
-                        .WithMany("ThietBiDanhMucs")
+                        .WithMany("ThietBiDanhMuc")
                         .HasForeignKey("DanhMucId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("QLTBSaoDo.Data.Entities.ThietBi", "ThietBi")
-                        .WithMany("ThietBiDanhMucs")
+                        .WithMany("ThietBiDanhMuc")
                         .HasForeignKey("ThietBiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -602,13 +729,13 @@ namespace QLTBSaoDo.Data.Migrations
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.ThietBiLoai", b =>
                 {
                     b.HasOne("QLTBSaoDo.Data.Entities.Loai", "Loai")
-                        .WithMany("ThietBiLoais")
+                        .WithMany("ThietBiLoai")
                         .HasForeignKey("LoaiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("QLTBSaoDo.Data.Entities.ThietBi", "ThietBi")
-                        .WithMany("ThietBiLoais")
+                        .WithMany("ThietBiLoai")
                         .HasForeignKey("ThietBiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -617,13 +744,13 @@ namespace QLTBSaoDo.Data.Migrations
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.ThietBiPhong", b =>
                 {
                     b.HasOne("QLTBSaoDo.Data.Entities.Phong", "Phong")
-                        .WithMany("ThietBiPhongs")
+                        .WithMany("ThietBiPhong")
                         .HasForeignKey("PhongId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("QLTBSaoDo.Data.Entities.ThietBi", "ThietBi")
-                        .WithMany("ThietBiPhongs")
+                        .WithMany("ThietBiPhong")
                         .HasForeignKey("ThietBiId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -632,23 +759,8 @@ namespace QLTBSaoDo.Data.Migrations
             modelBuilder.Entity("QLTBSaoDo.Data.Entities.TinhTrang", b =>
                 {
                     b.HasOne("QLTBSaoDo.Data.Entities.ThietBiPhong", "ThietBiPhong")
-                        .WithMany("TinhTrangs")
+                        .WithMany("TinhTrang")
                         .HasForeignKey("ThietBiPhongId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("QLTBSaoDo.Data.Entities.UserRoles", b =>
-                {
-                    b.HasOne("QLTBSaoDo.Data.Entities.Role", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QLTBSaoDo.Data.Entities.User", "User")
-                        .WithOne("UserRoles")
-                        .HasForeignKey("QLTBSaoDo.Data.Entities.UserRoles", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

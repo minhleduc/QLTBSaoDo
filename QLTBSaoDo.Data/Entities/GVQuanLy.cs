@@ -6,12 +6,12 @@ namespace QLTBSaoDo.Data.Entities
 {
     public partial class GVQuanLy
     {
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public int KhoaId { get; set; }
         public int PhongId { get; set; }
 
         public virtual Khoa Khoa { get; set; }
         public virtual Phong Phong { get; set; }
-        public virtual User User { get; set; }
+        public virtual AppUser AppUser { get; set; }
     }
 }
