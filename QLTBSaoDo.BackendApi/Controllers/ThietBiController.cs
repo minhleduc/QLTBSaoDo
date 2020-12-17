@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QLTBSaoDo.Application.Catalog.ThietBis;
 using QLTBSaoDo.ViewModels.Catalog.ThietBis;
@@ -11,6 +12,7 @@ namespace QLTBSaoDo.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ThietBiController : ControllerBase
     {
         private IThietBiService _thietBiService;
@@ -19,7 +21,7 @@ namespace QLTBSaoDo.BackendApi.Controllers
         {
             _thietBiService = thietBiService;
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> Get()
         {
